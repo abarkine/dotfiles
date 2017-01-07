@@ -2,7 +2,7 @@
 Current .bashrc of mine and other useful sources
 
 
-![alt text](https://github.com/20percent/BashRuntimeConfiguration/blob/master/bashrcSS.PNG "Current look of bashrc")
+![alt text](https://github.com/20percent/configurationItems/blob/master/bashrcSS.PNG "Current look of bashrc")
 
 
 current.bashrc -> Latest bashrc used by me
