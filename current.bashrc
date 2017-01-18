@@ -75,6 +75,8 @@ alias apt='sudo apt-get'
 alias killf='kill -9'
 # Gracefully kill
 alias killg='kill -15'
+# Shorter man / apropos
+alias man='man -k'
 
 # Functions
 # ClamAV - Antivirus / update definitions and run from given folder recursively(default: "/")
