@@ -1,0 +1,17 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "files.exclude": {
+    "**/.v*": true,
+    "**/.p*": true,
+    "**/bin": true,
+    "**/exe": true,
+    "**core": true,
+    "**doxyfile": true
+    },
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "workbench.statusBar.visible": true,
+    "editor.detectIndentation": false,
+    "files.eol": "\n",
+    "editor.mouseWheelZoom": true,
+    "workbench.activityBar.visible": true
+}

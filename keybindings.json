@@ -1,0 +1,50 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "f12",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "alt+e",
+        "command": "workbench.action.tasks.terminate"
+    },
+    {
+        "key": "alt+1",
+        "command": "editor.action.trimTrailingWhitespace",
+        "when": "!editorReadonly"
+    },
+    {
+        "key": "alt+2",
+        "command": "editor.action.indentationToSpaces",
+        "when": "!editorReadonly"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.actions.view.problems"
+    },
+    {
+        "key": "alt+3",
+        "command": "editor.action.formatDocument",
+        "when": "!editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+u",
+        "command": "workbench.action.output.toggleOutput"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.gotoLine"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.quickOpen"
+    },
+    { 
+        "key": "f7",
+        "command": "workbench.action.toggleZenMode" 
+    }
+]
