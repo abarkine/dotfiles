@@ -31,9 +31,6 @@ if [ ! -z "$PS1" ]; then
     export PS1="\n\[\033[0;31m\]asilelik\[$(tput sgr0)\]\[\033[0;37m\] @ \[$(tput sgr0)\]\[\033[0;32m\][\W]\[$(tput sgr0)\]\[\033[0;37m\] \\$ \[$(tput sgr0)\]"
 fi
 
-# Set PATH to reach common places
-PATH=$PATH:/opt/cross/bin/:/usr/local:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/vagrant/bin/:/home/vagrant/
-
 # Bind UP and DOWN keys for history search(same usage as Ctrl+R)
 bind '"\e[A"':"history-search-backward"
 bind '"\e[B"':"history-search-forward"
@@ -276,92 +273,6 @@ function daemon()
 {
     (exec "$@" >&/dev/null &)
 }
-#Quick C++ hello world
-function quickCpp()
-{
-    mkdir -p temp
-    cd temp
-    touch temp.cpp
-    echo "#include <stdio.h>" >> temp.cpp
-    echo >> temp.cpp
-    echo "int main(int argc, char **argv)" >> temp.cpp
-    echo "{" >> temp.cpp
-    echo "    printf(\"Hello world!\");" >> temp.cpp
-    echo "    return 0;" >> temp.cpp
-    echo "}" >> temp.cpp
-    g++ -o temp temp.cpp
-    chmod +x temp
-    ./temp
-}
-###### Machine details
-function computer()
-{
-    echo
-    echo "Your username is" $(whoami)
-    echo "Current date is" $(/bin/date)
-    echo "Last system boot happened at" $(who -b | awk '{print $3, $4}')
-    echo
-    echo "Latest activities in system:"
-    last -n 10 | head -n -2
-    echo
-    echo "============================== System =============================="
-    echo
-    echo "Operating system:" $(uname -o)
-    echo "Kernel release and version:" $(uname -rv)
-    echo "Architecture:" $(uname -i)
-    echo "Software version:" $(lsb_release -d | awk '{print $2,$3,$4}')
-    echo "Hostname:" $(hostname -s)
-    echo "FQDN:" $(hostname -f)
-    echo
-    echo "============================== Network =============================="
-    echo
-    echo "IP address:" $(hostname -i)
-    echo "External IP Address:" $(curl -s http://whatismyip.akamai.com/)
-    echo "DNS IP(s):" $(sed -e '/^$/d' /etc/resolv.conf | awk '{if (tolower($1)=="nameserver") print $2}')
-    echo "Network interfaces:" $(netstat -i | cut -d" " -f1 | egrep -v "^Kernel|Iface|lo")
-    echo "All addresses that assigned to host:" $(hostname -I)
-    echo
-    echo "=============== Overall network information ==============="
-    netstat
-    echo
-    echo "=============== Interface information ==============="
-    ip -4 address show
-    echo
-    echo "=============== Kernel interface table ==============="
-    netstat -i | sed -n '1!p'
-    echo
-    echo "=============== Numeric routing table ==============="
-    netstat -nr | sed -n '1!p'
-    echo
-    echo "=============== Open ports that listens for connection ==============="
-    netstat -l | sed -n '1!p'
-    echo
-    echo "=============== IFCONFIG results ==============="
-    IFCONFIG=(/sbin/ifconfig)
-    $IFCONFIG | awk /'inet addr/ {print $2}'
-    echo
-    $IFCONFIG | awk /'Bcast/ {print $3}'
-    echo
-    $IFCONFIG | awk /'inet addr/ {print $4}'
-    $IFCONFIG | awk /'HWaddr/ {print $4,$5}'
-    echo
-    echo "============================== Memory =============================="
-    echo
-    echo "=============== Information about partitions ==============="
-    df -ah
-    echo
-    echo "=============== Information about CPU ==============="
-    lscpu
-    echo
-    echo "=============== Memory distribution ==============="
-    free -m -l -t
-    echo
-    echo "=============== Top 10 RAM lovers ==============="
-    ps auxf | sort -nr -k 4 | head -12 | grep -v %MEM
-    echo
-    echo "=============== Top 10 CPU lovers ==============="
-    ps auxf | sort -nr -k 3 | head -12 | grep -v %MEM
-}
 # Have fun with other users in same system
 function scream()
 {
@@ -369,55 +280,3 @@ function scream()
         echo $1 | wall
     fi
 }
-# Override date function
-function adate()
-{
-    year=$(/bin/date +"%Y")
-    monthname=$(/bin/date +"%B")
-    daynumber=$(/bin/date +"%d")
-    dayname=$(/bin/date +"%A")
-    time=$(/bin/date +"%T")
-    echo "$time - $dayname, $daynumber $monthname $year"
-}
-# Greeting function
-function greetings()
-{
-    clear
-    # You may create an ASCII art here
-    echo
-    echo
-    # Past, current and next month, Monday as starting day to week
-    ncal -3MC
-    echo
-    echo
-    echo
-    # Daily message
-    YOURNAME="Asil"
-    hour=$(/bin/date +"%H")
-    if [ $hour -ge 6 -a $hour -lt 12 ]
-    then
-        echo "Good morning, $YOURNAME. You didn't sleep well, did you?'"
-    elif [ $hour -ge 12 -a $hour -lt 18 ]
-    then
-        echo "Good afternoon, $YOURNAME. I hope, morning was good enough."
-    elif [ $hour -ge 18 -a $hour -lt 24 ]
-    then
-        echo "Good evening, $YOURNAME. You are working even after your workhours."
-    else
-        echo "Good night, $YOURNAME. Isn't it a little bit late?'"
-    fi
-    echo
-    day=$(/bin/date +"%B%e")
-    case $day in
-        "August3") echo ":O It is your birthday";;
-        "August19") echo "It is asd's birthday.";;
-        *) adate;;
-    esac
-    echo
-}
-
-# Check for interactive shell before running echo commands
-# This will prevent errors that you will get when you use scp
-# Issue: https://bugzilla.redhat.com/show_bug.cgi?id=20527
-# Solution: http://stackoverflow.com/questions/21076725/net-scp-waiting-until-time-out-in-capistranos-gitwrapper-task/41192334#41192334
-[ ! -z "$PS1" ] && greetings
