@@ -38,10 +38,10 @@ alias which='type -a'
 alias paths='echo -e ${PATH//:/\\n}'
 
 # Search filename in current directory, recursively
-alias qf="find . -name "
+alias qf='find . -name '
 
 # Quick server in current directory
-alias qs="busybox httpd -f -p 8473"
+alias qs='busybox httpd -f -p 8473'
 
 # Check journal for service
-alias ql="sudo journalctl --no-pager -u "
+alias ql='sudo journalctl --no-pager -u '
