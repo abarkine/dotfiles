@@ -40,9 +40,6 @@ alias paths='echo -e ${PATH//:/\\n}'
 # Search filename in current directory, recursively
 alias qf="find . -name "
 
-# Use default package for clear
-alias clear="/usr/bin/clear_console -q"
-
 # Quick server in current directory
 alias qs="busybox httpd -f -p 8473"
 
