@@ -1,0 +1,7 @@
+[user]
+	name = Asil Elik
+	email = asil473@gmail.com
+[init]
+	defaultBranch = main
+[alias]
+	cm = commit -m
