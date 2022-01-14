@@ -2,4 +2,4 @@ PS1='[\[\033[38;5;13m\]\t\[$(tput sgr0)\]]\[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(
 PS2='> '
 PS3='#? '
 PS4='++ '
-PROMPT_COMMAND=''
+PROMPT_COMMAND='history -a'
